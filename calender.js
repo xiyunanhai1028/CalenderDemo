@@ -3,6 +3,7 @@
  *   luszy.com
  * */
 (function (window, undefined) {
+  console.log('window:', window);
   "use strict";
   var ZYCalender = function (params) {
     this.extend(this.params, params);
@@ -16,7 +17,7 @@
       color: "#ffd101", // 选中的文字颜色
       arrayJSON: "",
       confirmBtn: "",
-      callback: function () {},
+      callback: function () { },
     },
     init: function () {
       var self = this,
@@ -54,6 +55,7 @@
         "</tr>" +
         "</table>" +
         "<div class='tbody'></div>";
+      console.log(html);
       self.element.innerHTML = html;
       if (self.arrayJSON) {
         var arr = [],
@@ -91,11 +93,11 @@
           for (var j = 0; j < Ntr; j++) {
             self.element
               .querySelectorAll(".dateTable")
-              [ii].insertAdjacentHTML("beforeEnd", "<tr></tr>");
+            [ii].insertAdjacentHTML("beforeEnd", "<tr></tr>");
           }
           createTd = self.element
             .querySelectorAll(".dateTable")
-            [ii].querySelectorAll("tr");
+          [ii].querySelectorAll("tr");
           console.log("createTd:", createTd);
           createTd.forEach(function (element, index) {
             for (var m = 0; m < 7; m++) {
@@ -104,8 +106,7 @@
           });
           anyTd = self.element
             .querySelectorAll(".dateTable")
-            [ii].querySelectorAll("td");
-          console.log("ii:", anyTd);
+          [ii].querySelectorAll("td");
           for (var n = 0; n < DaysInMonth[currentMonth - 1]; n++) {
             p = firstDay++;
             anyTd[p].innerHTML = '<div class="con">' + (n + 1) + "</div>";
@@ -120,18 +121,18 @@
                   .insertAdjacentHTML(
                     "beforeEnd",
                     '<p class="fs10" data-id="' +
-                      element.id +
-                      '" data-price="' +
-                      element.price +
-                      '">' +
-                      "<span>" +
-                      element.price +
-                      "</span>" +
-                      "<br>" +
-                      "<span>" +
-                      element.number +
-                      "</span>" +
-                      "</p>"
+                    element.id +
+                    '" data-price="' +
+                    element.price +
+                    '">' +
+                    "<span>" +
+                    element.price +
+                    "</span>" +
+                    "<br>" +
+                    "<span>" +
+                    element.number +
+                    "</span>" +
+                    "</p>"
                   );
                 anyTd[p].querySelector(".con").classList.add("border");
               }
@@ -177,19 +178,21 @@
           for (var j = 0; j < Ntr; j++) {
             self.element
               .querySelectorAll(".dateTable")
-              [ii].insertAdjacentHTML("beforeEnd", "<tr></tr>");
+            [ii].insertAdjacentHTML("beforeEnd", "<tr></tr>");
           }
           createTd = self.element
             .querySelectorAll(".dateTable")
-            [ii].querySelectorAll("tr");
+          [ii].querySelectorAll("tr");
           createTd.forEach(function (element, index) {
             for (var m = 0; m < 7; m++) {
               element.insertAdjacentHTML("beforeEnd", "<td></td>");
             }
           });
+          console.log('createTd', createTd);
           anyTd = self.element
             .querySelectorAll(".dateTable")
-            [ii].querySelectorAll("td");
+          [ii].querySelectorAll("td");
+          console.log('anyTd:', anyTd);
           for (var n = 0; n < DaysInMonth[currentMonth]; n++) {
             anyTd[firstDay++].innerText = n + 1;
           }
@@ -214,6 +217,12 @@
           var startDayArrays = sels[
             u
           ].offsetParent.previousSibling.innerText.split("");
+          console.log("previousSibling", sels[
+            u
+          ].offsetParent.previousSibling);
+          console.log("offsetParent", typeof sels[
+            u
+          ].offsetParent);
           var startDayArrayYear = [],
             startDayArrayMonth = [],
             startDayYear = "",
@@ -252,6 +261,7 @@
     initSelect: function () {
       var self = this;
       var strDays = new Date().getDate();
+      console.log('strDays:', strDays);
       var arry = [];
       var arry1 = [];
       self.element
@@ -278,6 +288,7 @@
       return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
     },
     selectDate: function (arry1) {
+      console.log('arry1:', arry1);
       var self = this;
       self.bgColor = self.params.bgColor;
       self.color = self.params.color;
@@ -333,6 +344,8 @@
       });
     },
     addEvent: function (elm, type, fn) {
+      console.log("type:", type);
+      console.log("elm:", elm);
       if (window.attachEvent) {
         elm.attachEvent("on" + type, fn);
       } else if (window.addEventListener) {
